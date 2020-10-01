@@ -1,5 +1,7 @@
 package com.ecollect.app.module;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.UUID;
 
 public class CollectionSite {
@@ -11,13 +13,13 @@ public class CollectionSite {
     private final String city;
     private final String province;
 
-    public CollectionSite(UUID id,
-                          String name,
-                          String email,
-                          double latitude,
-                          double longitude,
-                          String city,
-                          String province)
+    public CollectionSite(@JsonProperty("id") UUID id,
+                          @JsonProperty("name") String name,
+                          @JsonProperty("email") String email,
+                          @JsonProperty("latitude") double latitude,
+                          @JsonProperty("longitude") double longitude,
+                          @JsonProperty("city") String city,
+                          @JsonProperty("province") String province)
     {
         this.id = id;
         this.name = name;

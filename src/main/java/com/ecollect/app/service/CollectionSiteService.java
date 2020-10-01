@@ -15,7 +15,7 @@ public class CollectionSiteService {
     private final CollectionSiteDao collectionSiteDao;
 
     @Autowired
-    public CollectionSiteService(@Qualifier("fakeDao") CollectionSiteDao collectionSiteDao){
+    public CollectionSiteService(@Qualifier("postgres") CollectionSiteDao collectionSiteDao){
         this.collectionSiteDao = collectionSiteDao;
     }
 
