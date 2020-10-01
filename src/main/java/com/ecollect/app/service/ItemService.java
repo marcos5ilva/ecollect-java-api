@@ -5,6 +5,8 @@ import com.ecollect.app.module.Item;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItemService {
     private final ItemDao itemDao;
@@ -16,4 +18,6 @@ public class ItemService {
     public int addItem(Item item){
         return itemDao.insertItem( item);
     }
+
+    public List<Item> getAllItems(){return itemDao.selectAllItems();}
 }

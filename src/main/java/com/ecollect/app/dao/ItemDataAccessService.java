@@ -32,7 +32,19 @@ public class ItemDataAccessService implements ItemDao{
 
     @Override
     public List<Item> selectAllItems() {
-        return null;
+        final String sql = "SELECT id, name, image FROM item";
+        List<Item> items = jdbcTemplate.query(sql, (resultSet,i) -> {
+            UUID id = UUID.fromString(resultSet.getString("id"));
+            String name = resultSet.getString("name");
+            String image = resultSet.getString("image");
+
+            return new Item(
+                    id,
+                    name,
+                    image
+            );
+        });
+        return items;
     }
 
     @Override

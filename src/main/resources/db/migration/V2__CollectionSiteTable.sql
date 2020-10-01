@@ -8,3 +8,4 @@ CREATE TABLE collection_site(
     province VARCHAR(2) NOT NULL
 
 )
+
