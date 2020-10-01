@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository("postgres")
+@Repository("item-postgres")
 public class ItemDataAccessService implements ItemDao{
 
     private final JdbcTemplate jdbcTemplate;
@@ -27,7 +27,7 @@ public class ItemDataAccessService implements ItemDao{
         String image = item.getImage();
 
         jdbcTemplate.update(sql, new Object[]{id, name, image});
-        return 0;
+        return 1;
     }
 
     @Override
