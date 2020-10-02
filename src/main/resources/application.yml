@@ -1,7 +1,7 @@
 
 app:
   datasource:
-    jdbc-url: jdbc:postgresql://localhost:5432/postgres_ecollect
+    jdbc-url: jdbc:postgresql://localhost:5432/ecollectdb
     username: postgres
     password: password
     pool-size: 30

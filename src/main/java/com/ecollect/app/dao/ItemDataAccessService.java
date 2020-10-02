@@ -49,16 +49,51 @@ public class ItemDataAccessService implements ItemDao{
 
     @Override
     public Optional<Item> selectItemById(UUID id) {
-        return Optional.empty();
+
+        final String sql = "SELECT id, name, image FROM item WHERE id =?";
+        Item item = jdbcTemplate.queryForObject(sql, new Object[]{id}, (resultSet, i)->{
+            UUID uuid = UUID.fromString(resultSet.getString("id"));
+            String name = resultSet.getString("name");
+            String image = resultSet.getString("image");
+
+            return new Item(
+                    uuid,
+                    name,
+                    image
+            );
+        });
+
+        return Optional.ofNullable(item);
     }
 
     @Override
     public int deleteItemById(UUID id) {
-        return 0;
+        Optional<Item> itemMaybe = selectItemById(id);
+
+        if(itemMaybe.isEmpty())
+        {
+            return 0;
+        }
+        final  String sql = "DELETE FROM item WHERE id = ?";
+        jdbcTemplate.update(sql, new Object[]{id});
+
+        return 1;
     }
 
     @Override
     public int updateItemById(UUID id, Item item) {
-        return 0;
+        Optional<Item> itemMaybe = selectItemById(id);
+        if(itemMaybe.isEmpty())
+        {
+            return 0;
+        }
+
+        final String sql =  "UPDATE item SET name=?, image=? WHERE id=?";
+        UUID uuid = item.getId();
+        String name = item.getName();
+        String image = item.getImage();
+
+        jdbcTemplate.update(sql, new Object[]{name, image, id});
+        return 1;
     }
 }
