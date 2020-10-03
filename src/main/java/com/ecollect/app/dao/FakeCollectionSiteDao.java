@@ -21,7 +21,8 @@ public class FakeCollectionSiteDao implements CollectionSiteDao{
                 collectionSite.getLatitude(),
                 collectionSite.getLongitude(),
                 collectionSite.getCity(),
-                collectionSite.getProvince()
+                collectionSite.getProvince(),
+                collectionSite.getItems()
                 ));
         return 1;
     }
@@ -61,7 +62,8 @@ public class FakeCollectionSiteDao implements CollectionSiteDao{
                                         collectionSite.getLatitude(),
                                         collectionSite.getLongitude(),
                                         collectionSite.getCity(),
-                                        collectionSite.getProvince()));
+                                        collectionSite.getProvince(),
+                                        collectionSite.getItems()));
                                 return 1;
                             }
                             return 0;

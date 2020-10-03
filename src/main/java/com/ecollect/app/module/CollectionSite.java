@@ -2,6 +2,7 @@ package com.ecollect.app.module;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.sql.Array;
 import java.util.UUID;
 
 public class CollectionSite {
@@ -12,6 +13,7 @@ public class CollectionSite {
     private final double longitude;
     private final String city;
     private final String province;
+    private final String[] items;
 
     public CollectionSite(@JsonProperty("id") UUID id,
                           @JsonProperty("name") String name,
@@ -19,7 +21,8 @@ public class CollectionSite {
                           @JsonProperty("latitude") double latitude,
                           @JsonProperty("longitude") double longitude,
                           @JsonProperty("city") String city,
-                          @JsonProperty("province") String province)
+                          @JsonProperty("province") String province,
+                          @JsonProperty("items") String[] items)
     {
         this.id = id;
         this.name = name;
@@ -28,6 +31,7 @@ public class CollectionSite {
         this.longitude = longitude;
         this.city = city;
         this.province = province;
+        this.items = items;
     }
 
     public UUID getId() {
@@ -56,5 +60,9 @@ public class CollectionSite {
 
     public String getProvince() {
         return province;
+    }
+
+    public String[] getItems() {
+        return items;
     }
 }

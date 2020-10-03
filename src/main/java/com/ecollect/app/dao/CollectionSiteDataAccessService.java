@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Array;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,13 +23,14 @@ public class CollectionSiteDataAccessService implements CollectionSiteDao{
     @Override
     public int insertCollectionSite(UUID id, CollectionSite collectionSite) {
 
-        final String sql = "INSERT INTO collection_site (id, name, email, latitude, longitude, city , province) VALUES (?, ?,?,?,?,?,?)";
+        final String sql = "INSERT INTO collection_site (id, name, email, latitude, longitude, city , province, items) VALUES (?, ?,?,?,?,?,?,?)";
         String name = collectionSite.getName();
         String email =  collectionSite.getEmail();
         double latitude = collectionSite.getLatitude();
         double longitude = collectionSite.getLongitude();
         String city = collectionSite.getCity();
         String province =  collectionSite.getProvince();
+        String[] items = {};
 
         jdbcTemplate.update(sql, new Object[]{id,name,email,latitude,longitude,city,province});
         return 1;
@@ -36,7 +38,7 @@ public class CollectionSiteDataAccessService implements CollectionSiteDao{
 
     @Override
     public List<CollectionSite> selectAllCollectionSites() {
-        final String sql = "SELECT id, name, email, latitude, longitude, city, province FROM collection_site";
+        final String sql = "SELECT id, name, email, latitude, longitude, city, province, FROM collection_site";
         List<CollectionSite> collectionSites = jdbcTemplate.query(sql, (resultSet, i)->{
             UUID id = UUID.fromString(resultSet.getString("id"));
             String name = resultSet.getString("name");
@@ -46,6 +48,8 @@ public class CollectionSiteDataAccessService implements CollectionSiteDao{
             String city = resultSet.getString("city");
             String province = resultSet.getString("province");
 
+            String[] items={};
+
             return new CollectionSite(
                     id,
                     name,
@@ -53,7 +57,8 @@ public class CollectionSiteDataAccessService implements CollectionSiteDao{
                     latitude,
                     longitude,
                     city,
-                    province);
+                    province,
+                    items);
         });
         return collectionSites;
     }
@@ -70,6 +75,7 @@ public class CollectionSiteDataAccessService implements CollectionSiteDao{
             double longitude = resultSet.getFloat("longitude");
             String city = resultSet.getString("city");
             String province = resultSet.getString("province");
+            String[] items={};
 
             return new CollectionSite(
                     uuid,
@@ -78,7 +84,8 @@ public class CollectionSiteDataAccessService implements CollectionSiteDao{
                     latitude,
                     longitude,
                     city,
-                    province);
+                    province,
+                    items);
         });
         return Optional.ofNullable(collectionSite);
     }
@@ -112,6 +119,7 @@ public class CollectionSiteDataAccessService implements CollectionSiteDao{
         double longitude = collectionSite.getLongitude();
         String city = collectionSite.getCity();
         String province =  collectionSite.getProvince();
+        String[] items = {};
 
         jdbcTemplate.update(sql, new Object[]{name,email,latitude,longitude,city,province, uuid});
 

@@ -12,9 +12,7 @@ CREATE TABLE IF NOT EXISTS collection_site(
     latitude DECIMAL(20) NOT NULL,
     longitude DECIMAL(20) NOT NULL,
     city VARCHAR(100) NOT NULL,
-    province VARCHAR(2) NOT NULL,
-    items int[] default '{}'
-
+    province VARCHAR(2) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS sites_items(
